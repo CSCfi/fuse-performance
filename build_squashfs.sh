@@ -22,5 +22,5 @@ for ((i = 1; i <= N; i++)); do
 done
 
 #mksquashfs "$stage" "$OUT" -noappend -comp zstd -b 128K -all-root -no-xattrs
-mksquashfs "$stage" "$OUT" -noappend -comp lz4 -b 128K -all-root -no-xattrs
-#mksquashfs "$stage" "$OUT" -noappend -noI -noD -noF -noX -no-fragments -b 128K -all-root -no-xattrs
+#mksquashfs "$stage" "$OUT" -noappend -comp lz4 -b 128K -all-root -no-xattrs
+mksquashfs "$stage" "$OUT" -noappend -noI -noD -noF -noX -no-fragments -b 128K -all-root -no-xattrs
