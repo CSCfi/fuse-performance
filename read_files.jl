@@ -23,11 +23,29 @@ if abspath(PROGRAM_FILE) == @__FILE__
     println("/tmp cached")
     @time read_files("/tmp/tollande/squashfs_tmp", order)
 
-    println("squashfuse_ll fresh")
+    println("squashfuse_ll nocomp fresh")
     @time read_files("/tmp/tollande/squashfs_fuse", order)
 
-    println("squashfuse_ll cached")
+    println("squashfuse_ll nocomp cached")
     @time read_files("/tmp/tollande/squashfs_fuse", order)
+
+    println("squashfuse_ll lz4 fresh")
+    @time read_files("/tmp/tollande/squashfs_fuse_lz4", order)
+
+    println("squashfuse_ll lz4 cached")
+    @time read_files("/tmp/tollande/squashfs_fuse_lz4", order)
+
+    println("squashfuse_ll zstd fresh")
+    @time read_files("/tmp/tollande/squashfs_fuse_zstd", order)
+
+    println("squashfuse_ll zstd cached")
+    @time read_files("/tmp/tollande/squashfs_fuse_zstd", order)
+
+    println("squashfuse_ll gzip fresh")
+    @time read_files("/tmp/tollande/squashfs_fuse_gzip", order)
+
+    println("squashfuse_ll gzip cached")
+    @time read_files("/tmp/tollande/squashfs_fuse_gzip", order)
 
     println("lustre scratch fresh")
     @time read_files("/scratch/project_2001659/squashfs_lustre", order)
