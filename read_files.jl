@@ -29,7 +29,7 @@ if abspath(PROGRAM_FILE) == @__FILE__
     @time read_files("/tmp/tollande/squashfs_tmp", order)
     println("/tmp cached")
     @time read_files("/tmp/tollande/squashfs_tmp", order)
-    rm("/tmp/tollande/squashfs_tmp")
+    rm("/tmp/tollande/squashfs_tmp", force=true)
 
     for (sqfs_file, mountpoint) in foo
         mkpath(mountpoint)
@@ -47,5 +47,5 @@ if abspath(PROGRAM_FILE) == @__FILE__
     @time read_files("/scratch/project_2001659/squashfs_lustre", order)
     println("lustre scratch cached")
     @time read_files("/scratch/project_2001659/squashfs_lustre", order)
-    rm("/scratch/project_2001659/squashfs_lustre")
+    rm("/scratch/project_2001659/squashfs_lustre", force=true)
 end
