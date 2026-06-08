@@ -23,7 +23,6 @@ if abspath(PROGRAM_FILE) == @__FILE__
     @time read_files("$tmp_root/squashfs_tmp", order)
     println("/tmp cached")
     @time read_files("$tmp_root/squashfs_tmp", order)
-    #rm("/tmp/tollande/squashfs_tmp", force=true)
 
     foo = [
         ("nocompression.sqfs", "$tmp_root/squashfs_fuse"),
@@ -39,7 +38,6 @@ if abspath(PROGRAM_FILE) == @__FILE__
         println("squashfuse_ll cached $sqfs_file")
         @time read_files(mountpoint, order)
         run(`fusermount -u $mountpoint`)
-        #rm(mountpoint)
     end
 
     lustre_root = mktempdir("/scratch/project_2001659")
@@ -48,5 +46,4 @@ if abspath(PROGRAM_FILE) == @__FILE__
     @time read_files("$lustre_root/squashfs_lustre", order)
     println("lustre scratch cached")
     @time read_files("$lustre_root/squashfs_lustre", order)
-    #rm("/scratch/project_2001659/squashfs_lustre", force=true)
 end
