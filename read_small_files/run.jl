@@ -42,7 +42,7 @@ if abspath(PROGRAM_FILE) == @__FILE__
         run(`fusermount -u $mountpoint`)
     end
 
-    lustre_scratch_dir = mktempdir("/scratch/project_2001659")
+    lustre_scratch_dir = joinpath(mktempdir("/scratch/project_2001659"), "lustre_scratch")
     run(`unsquashfs -dest $lustre_scratch_dir nocompression.sqfs`)
     println("$lustre_scratch_dir fresh")
     @time read_files(lustre_scratch_dir, order)
