@@ -18,19 +18,20 @@ if abspath(PROGRAM_FILE) == @__FILE__
     read_files("non-existent", Int[])
 
     tmp_root = mktempdir()
-    run(`unsquashfs -dest $tmp_root/squashfs_tmp nocompression.sqfs`)
-    println("/tmp fresh")
-    @time read_files("$tmp_root/squashfs_tmp", order)
-    println("/tmp cached")
-    @time read_files("$tmp_root/squashfs_tmp", order)
 
-    foo = [
-        ("nocompression.sqfs", "$tmp_root/squashfs_fuse"),
-        ("lz4.sqfs", "$tmp_root/squashfs_fuse_lz4"),
-        ("zstd.sqfs", "$tmp_root/squashfs_fuse_zstd"),
-        ("gzip.sqfs", "$tmp_root/squashfs_fuse_gzip"),
+    run(`unsquashfs -dest $tmp_root/tmp nocompression.sqfs`)
+    println("/tmp fresh")
+    @time read_files("$tmp_root/tmp", order)
+    println("/tmp cached")
+    @time read_files("$tmp_root/tmp", order)
+
+    file_mp = [
+        ("nocompression.sqfs", "$tmp_root/fuse_squashfs_nocompression"),
+        ("lz4.sqfs", "$tmp_root/fuse_squashfs_lz4"),
+        ("zstd.sqfs", "$tmp_root/fuse_squashfs_zstd"),
+        ("gzip.sqfs", "$tmp_root/fuse_squashfs_gzip"),
     ]
-    for (sqfs_file, mountpoint) in foo
+    for (sqfs_file, mountpoint) in file_mp
         mkpath(mountpoint)
         run(`squashfuse_ll $sqfs_file $mountpoint`)
         println("squashfuse_ll fresh $sqfs_file")
@@ -41,9 +42,9 @@ if abspath(PROGRAM_FILE) == @__FILE__
     end
 
     lustre_root = mktempdir("/scratch/project_2001659")
-    run(`unsquashfs -dest $lustre_root/squashfs_lustre nocompression.sqfs`)
+    run(`unsquashfs -dest $lustre_root/lustre nocompression.sqfs`)
     println("lustre scratch fresh")
-    @time read_files("$lustre_root/squashfs_lustre", order)
+    @time read_files("$lustre_root/lustre", order)
     println("lustre scratch cached")
-    @time read_files("$lustre_root/squashfs_lustre", order)
+    @time read_files("$lustre_root/lustre", order)
 end
