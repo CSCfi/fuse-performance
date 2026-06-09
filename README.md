@@ -22,11 +22,12 @@ cd read_small_files
 Create squashfs:
 
 ```bash
-./build_squashfs 10000
+module load julia
+julia build_squashfs.jl 10000
 ```
 
 Run benchmark:
 
 ```bash
-./run_read.sh
+./run.sh
 ```
